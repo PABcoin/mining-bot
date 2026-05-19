@@ -1,0 +1,103 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --bg-dark: #080c10;
+  --bg-card: #0d1319;
+  --bg-card2: #111820;
+  --accent: #00e5ff;
+  --accent2: #00ff88;
+  --accent-dim: rgba(0, 229, 255, 0.12);
+  --border: rgba(0, 229, 255, 0.15);
+  --text: #e2eaf2;
+  --muted: #5a7a90;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--bg-dark);
+  color: var(--text);
+  font-family: 'Syne', sans-serif;
+  min-height: 100vh;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--bg-dark); }
+::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+
+/* Glow effects */
+.glow-cyan { box-shadow: 0 0 20px rgba(0, 229, 255, 0.2); }
+.glow-green { box-shadow: 0 0 20px rgba(0, 255, 136, 0.2); }
+.text-glow { text-shadow: 0 0 20px rgba(0, 229, 255, 0.5); }
+.text-glow-green { text-shadow: 0 0 20px rgba(0, 255, 136, 0.5); }
+
+/* Animated gradient border */
+.border-glow {
+  border: 1px solid var(--border);
+  position: relative;
+}
+.border-glow::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(135deg, rgba(0,229,255,0.3), transparent, rgba(0,255,136,0.2));
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+}
+
+/* Scanlines overlay */
+.scanlines::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(0,0,0,0.03) 2px,
+    rgba(0,0,0,0.03) 4px
+  );
+  pointer-events: none;
+  z-index: 9999;
+}
+
+/* Mono font for numbers */
+.font-mono { font-family: 'Space Mono', monospace; }
+
+/* Pulse animation for online status */
+@keyframes pulse-green {
+  0%, 100% { opacity: 1; box-shadow: 0 0 6px rgba(0,255,136,0.8); }
+  50% { opacity: 0.6; box-shadow: 0 0 12px rgba(0,255,136,0.4); }
+}
+.pulse-green { animation: pulse-green 2s ease-in-out infinite; }
+
+/* Fade in */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.fade-up { animation: fadeUp 0.5s ease forwards; }
+.fade-up-1 { animation: fadeUp 0.5s 0.1s ease both; }
+.fade-up-2 { animation: fadeUp 0.5s 0.2s ease both; }
+.fade-up-3 { animation: fadeUp 0.5s 0.3s ease both; }
+.fade-up-4 { animation: fadeUp 0.5s 0.4s ease both; }
+
+/* Hashrate bar animation */
+@keyframes fillBar {
+  from { width: 0; }
+}
+.fill-bar { animation: fillBar 1s ease forwards; }
+
+/* Number counter */
+@keyframes countUp {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
